@@ -4,7 +4,7 @@ def git_url = "https://github.com/stevenchen0018/myjoy-cloud.git"
 
 def tag = "latest"
 
-def harbor_url = "192.168.168.14"
+def harbor_url = "docker.lifedd.cn"
 
 def harbor_auth = "584bf0a9-d247-4c4f-9e29-b9291381dd45"
 
