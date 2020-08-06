@@ -12,6 +12,13 @@ def harbor_project = "myjoy-cloud"
 
 node {
 
+
+    //获取当前选择的项目名称
+    def projectNames = "${project_name}".split(",")
+
+    //获取当前选择的服务器名称
+    def Servers = "${publish_server}".split(",")
+
 	stage('拉取代码') {
 		checkout([$class: 'GitSCM', branches: [[name: '*/${branch}']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: "${git_auth}", url: "${git_url}"]]])
 	}
