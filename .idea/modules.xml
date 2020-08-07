@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/myjoy-cloud.iml" filepath="$PROJECT_DIR$/.idea/myjoy-cloud.iml" />
+      <module fileurl="file://$PROJECT_DIR$/myjoy-config-service/myjoy-config-service.iml" filepath="$PROJECT_DIR$/myjoy-config-service/myjoy-config-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/myjoy-eureka-master-service/myjoy-eureka-master-service.iml" filepath="$PROJECT_DIR$/myjoy-eureka-master-service/myjoy-eureka-master-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/myjoy-eureka1-service/myjoy-eureka1-service.iml" filepath="$PROJECT_DIR$/myjoy-eureka1-service/myjoy-eureka1-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/myjoy-eureka3-service/myjoy-eureka3-service.iml" filepath="$PROJECT_DIR$/myjoy-eureka3-service/myjoy-eureka3-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/myjoy-monitor-service/myjoy-monitor-service.iml" filepath="$PROJECT_DIR$/myjoy-monitor-service/myjoy-monitor-service.iml" />
+    </modules>
+  </component>
+</project>

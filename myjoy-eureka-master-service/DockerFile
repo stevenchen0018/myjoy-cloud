@@ -1,0 +1,5 @@
+FROM openjdk:8-jdk-alpine
+ARG JAR_FILE
+COPY ${JAR_FILE}
+EXPOSE 8801
+ENTRYPOINT ["java","-jar","/${JAR_FILE}"]
