@@ -1,5 +1,5 @@
 FROM openjdk:8-jdk-alpine
 ARG JAR_FILE
-COPY ${JAR_FILE}
+COPY ${JAR_FILE} myjoy-eureka1-service.jar
 EXPOSE 8800
-ENTRYPOINT ["java","-jar","/${JAR_FILE}"]
+ENTRYPOINT ["java","-jar","/myjoy-eureka1-service.jar"]
