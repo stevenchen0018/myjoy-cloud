@@ -1,4 +1,4 @@
-FROM openjdk:8-jdk-alpine
+FROM openjdk:8
 ARG JAR_FILE
 COPY ${JAR_FILE} myjoy-eureka3-service.jar
 EXPOSE 8802
