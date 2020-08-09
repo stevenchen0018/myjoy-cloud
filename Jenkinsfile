@@ -31,7 +31,9 @@ node {
              def projectInfo = projectNames[i];
 
              //切割出微服务名
-             def projectName = "${projectInfo}"
+             def projectName = "${projectInfo}".split("@")[0]
+
+             sh "echo 微服务名字," ${projectName}
 
              sh "/usr/local/maven/bin/mvn -f ${projectName} clean package dockerfile:build"
          }
