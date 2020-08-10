@@ -35,7 +35,7 @@ node {
 
              sh "echo 微服务名字: ${projectName}"
 
-             sh "mvn -f ${projectName} clean package dockerfile:build"
+             sh "/usr/local/maven/bin/mvn -f ${projectName} clean package dockerfile:build"
          }
     }
 
