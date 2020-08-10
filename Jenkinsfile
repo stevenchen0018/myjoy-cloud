@@ -19,9 +19,9 @@ node {
     //获取当前选择的服务器名称
     def Servers = "${publish_server}".split(",")
 
-	stage('拉取代码') {
-		checkout([$class: 'GitSCM', branches: [[name: '*/${branch}']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: "${git_auth}", url: "${git_url}"]]])
-	}
+	//stage('拉取代码') {
+	//	checkout([$class: 'GitSCM', branches: [[name: '*/${branch}']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: "${git_auth}", url: "${git_url}"]]])
+	//}
 
 	stage('编译，安装公共子工程') {
 
