@@ -35,6 +35,8 @@ node {
 
              sh "echo 微服务名字: ${projectName}"
 
+             sh "ls -l /var/jenkins_home/workspace/eureka微服务/${projectName}"
+
              sh "/usr/local/maven/bin/mvn -f ${projectName} clean package dockerfile:build"
          }
     }
