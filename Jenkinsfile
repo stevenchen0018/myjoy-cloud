@@ -19,25 +19,25 @@ node {
     //获取当前选择的服务器名称
     def Servers = "${publish_server}".split(",")
 
-	//stage('拉取代码') {
-	//	checkout([$class: 'GitSCM', branches: [[name: '*/${branch}']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: "${git_auth}", url: "${git_url}"]]])
-	//}
+	stage('拉取代码') {
+		checkout([$class: 'GitSCM', branches: [[name: '*/${branch}']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: "${git_auth}", url: "${git_url}"]]])
+	}
 
-	stage('编译，安装公共子工程') {
+	//stage('编译，安装公共子工程') {
 
-    	 for(int i=0; i<projectNames.length;i++){
+    //	 for(int i=0; i<projectNames.length;i++){
 
              //获取每个微服务的名字
-             def projectInfo = projectNames[i];
+      //       def projectInfo = projectNames[i];
 
              //切割出微服务名
-             def projectName = "${projectInfo}".split("@")[0]
+       //      def projectName = "${projectInfo}".split("@")[0]
 
-             sh "echo 微服务名字: ${projectName}"
+         //    sh "echo 微服务名字: ${projectName}"
 
-             sh "/usr/local/maven/bin/mvn -f ${projectName} clean package dockerfile:build"
-         }
-    }
+         //    sh "/usr/local/maven/bin/mvn -f ${projectName} clean package dockerfile:build"
+        // }
+   // }
 
     stage('镜像上传至Harbor仓库') {
 
