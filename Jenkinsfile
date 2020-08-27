@@ -4,11 +4,11 @@ def git_url = "https://github.com/stevenchen0018/myjoy-cloud.git"
 
 def tag = "latest"
 
-def harbor_url = "docker.lifedd.cn"
+def aliyun_url = "registry.cn-shenzhen.aliyuncs.com"
 
-def harbor_auth = "584bf0a9-d247-4c4f-9e29-b9291381dd45"
+def aliyun_auth = "584bf0a9-d247-4c4f-9e29-b9291381dd45"
 
-def harbor_project = "myjoy-cloud"
+def aliyun_project = "myjoy-cloud"
 
 node {
 
@@ -23,23 +23,23 @@ node {
 		checkout([$class: 'GitSCM', branches: [[name: '*/${branch}']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: "${git_auth}", url: "${git_url}"]]])
 	}
 
-	//stage('编译，安装公共子工程') {
+	stage('编译，安装公共子工程') {
 
-    //	 for(int i=0; i<projectNames.length;i++){
+    	 for(int i=0; i<projectNames.length;i++){
 
              //获取每个微服务的名字
-      //       def projectInfo = projectNames[i];
+             def projectInfo = projectNames[i];
 
              //切割出微服务名
-       //      def projectName = "${projectInfo}".split("@")[0]
+             def projectName = "${projectInfo}".split("@")[0]
 
-         //    sh "echo 微服务名字: ${projectName}"
+             sh "echo 微服务名字: ${projectName}"
 
-         //    sh "/usr/local/maven/bin/mvn -f ${projectName} clean package dockerfile:build"
-        // }
-   // }
+             sh "/usr/local/maven/bin/mvn -f ${projectName} clean package dockerfile:build"
+         }
+    }
 
-    stage('镜像上传至Harbor仓库') {
+    stage('镜像上传至阿里云仓库') {
 
        for(int i=0; i<projectNames.length;i++){
 
@@ -56,19 +56,19 @@ node {
             def imageName = "${projectName}:${tag}"
 
             //为镜像打标签
-            sh "docker tag ${imageName}  ${harbor_url}/${harbor_project}/${imageName}"
+            sh "docker tag ${imageName}  ${aliyun_url}/${aliyun_project}/${imageName}"
 
-            //凭据登录Harbor
-            withCredentials([usernamePassword(credentialsId:"${harbor_auth}", passwordVariable: 'password', usernameVariable: 'username')]) {
+            //凭据登录
+            withCredentials([usernamePassword(credentialsId:"${aliyun_auth}", passwordVariable: 'password', usernameVariable: 'username')]) {
 
              //引用用户名密码登录
-             sh "docker login -u ${username} -p ${password} ${harbor_url}"
+             sh "docker login -u ${username} -p ${password} ${aliyun_url}"
 
              //镜像上传
-             sh "docker push ${harbor_url}/${harbor_project}/${imageName} && echo 镜像上传成功"
+             sh "docker push ${aliyun_url}/${aliyun_project}/${imageName} && echo 镜像上传成功"
 
              //登出 Harbor
-             sh "docker logout ${harbor_url}"
+             sh "docker logout ${aliyun_url}"
 
             }
 
@@ -78,7 +78,7 @@ node {
                 def ServerName = Servers[j]
 
                 // 部署应用
-                sshPublisher(publishers: [sshPublisherDesc(configName: "${ServerName}", transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: "/opt/jenkins/deployCluster.sh $harbor_url $harbor_project $projectName $tag $projectPort ", execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
+                sshPublisher(publishers: [sshPublisherDesc(configName: "${ServerName}", transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: "/opt/jenkins/deployCluster.sh $aliyun_url $aliyun_project $projectName $tag $projectPort ", execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
             }
        }
 
