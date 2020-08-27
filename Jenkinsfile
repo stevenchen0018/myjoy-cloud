@@ -6,12 +6,11 @@ def tag = "latest"
 
 def aliyun_url = "registry.cn-shenzhen.aliyuncs.com"
 
-def aliyun_auth = "584bf0a9-d247-4c4f-9e29-b9291381dd45"
+def aliyun_auth = "c4e8b604-450d-4872-97b7-a6475abf6700"
 
 def aliyun_project = "myjoy-cloud"
 
 node {
-
 
     //获取当前选择的项目名称
     def projectNames = "${project_name}".split(",")
